@@ -18,6 +18,4 @@ public class MoviesApplication {
 		MovieList movielist = new MovieList();
 		return movielist.toString();
 	}
-
-
 }
