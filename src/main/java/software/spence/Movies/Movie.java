@@ -1,37 +1,62 @@
 package software.spence.Movies;
+import javax.persistence.*;
 
+@Entity
+@Table(name ="movie")
 public class Movie {
 
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name="id")
+    private int film_id;
+    @Column(name="date")
+    private int year;
     private String title;
-    private int date;
+    private int rating;
 
-    public Movie(String title, int date) {
+
+    public Movie(int film_id, int year, String title, int rating){
+        this.film_id = film_id;
+        this.year = year;
         this.title = title;
-        this.date = date;
+        this.rating = rating;
+
     }
 
-    public String getTitle() {
+    public Movie(){
+
+    }
+
+    public String getTitle(){
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title){
         this.title = title;
     }
 
-    public int getDate() {
-        return date;
+    public int getYear(){
+        return year;
     }
 
-    public void setDate(int date) {
-        this.date = date;
+    public void setYear(int year){
+        this.year = year;
     }
 
-
-    public String getJsonObjectOfMovie() {
-        return "{" +
-                "\"title\" : \" " + title + "\"," +
-                "\" date\" : \" " + date + "\"" +
-                "}";
-
+    public int getId() {
+        return film_id;
     }
+
+    public void setId(int film_id) {
+        this.film_id = film_id;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
 }

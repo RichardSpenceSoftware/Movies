@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class IsitDune {
 
-    Movie Dune = new Movie("Dune", 2021);
+    Movie Dune = new Movie(1, 2021, "Dune", 123);
     private String title;
     private String actualtitle;
 
