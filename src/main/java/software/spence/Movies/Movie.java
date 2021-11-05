@@ -15,11 +15,10 @@ public class Movie {
     private int rating;
 
 
-    public Movie(int film_id, int year, String title, int rating){
-        this.film_id = film_id;
+    public Movie(int film_id, int year, String title){
+        this.film_id =film_id;
         this.year = year;
         this.title = title;
-        this.rating = rating;
 
     }
 

@@ -32,17 +32,12 @@ public class MoviesApplication {
 		return movieRepository.findAll();
 	}
 
-	///////@GetMapping("/films/{film_id}")
-	/////////public @ResponseBody Movie getFilm(@PathVariable int film_id) {
-		/////////Optional<Movie> filmResponse = MovieRepository.findById(film_id);
-		///////////Movie film = filmResponse.get();
-		/////////return film;
-	///////}
+
 
 	@PostMapping("/addMovie")
 	public @ResponseBody String addAMovie (@RequestParam int film_id, @RequestParam int year,
 										   @RequestParam String title ,@RequestParam int rating){
-		Movie savedMovie = new Movie(film_id, year, title, rating);
+		Movie savedMovie = new Movie(film_id, year, title);
 		movieRepository.save(savedMovie);
 		return "Saved";
 	}
@@ -88,8 +83,5 @@ public class MoviesApplication {
 		Movie film = filmResponse.get();
 		return film;
 	}
-	///@PostMapping(value="/films", consumes="application/json", produces="application/json")
-	///public Movie addFilm(@RequestBody Movie film){
-		///return film;}
 
 }
