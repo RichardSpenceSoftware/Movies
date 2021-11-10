@@ -35,9 +35,9 @@ public class MoviesApplication {
 
 
 	@PostMapping("/addMovie")
-	public @ResponseBody String addAMovie (@RequestParam int film_id, @RequestParam int year,
-										   @RequestParam String title ,@RequestParam int rating){
-		Movie savedMovie = new Movie(film_id, year, title);
+	public @ResponseBody String addAMovie (@RequestParam int film_id,
+										   @RequestParam String title){
+		Movie savedMovie = new Movie(film_id, title);
 		movieRepository.save(savedMovie);
 		return "Saved";
 	}
@@ -49,12 +49,11 @@ public class MoviesApplication {
 	}
 
 	@PostMapping("/updateMovie")
-	public @ResponseBody String updateMovie (@RequestParam int film_id, @RequestParam int year,
+	public @ResponseBody String updateMovie (@RequestParam int film_id,
 											 @RequestParam String title){
 		Optional<Movie> movie = movieRepository.findById(film_id);
 		Movie film = movie.get();
 		film.setTitle(title);
-		film.setYear(year);
 		movieRepository.save(film);
 		return "Movie updated";
 	}
@@ -66,7 +65,7 @@ public class MoviesApplication {
 		return movieresponse;
 	}
 
-	@GetMapping("/addRating")
+	/*@GetMapping("/addRating")
 	public @ResponseBody String addMovieRating (@RequestParam int film_id, @RequestParam int rating){
 		Optional<Movie> movie = movieRepository.findById(film_id);
 		Movie film = movie.get();
@@ -75,7 +74,7 @@ public class MoviesApplication {
 		film.setRating(newrating);
 		movieRepository.save(film);
 		return "Rating updated";
-	}
+	}*/
 
 	@GetMapping("/getMovie")
 	public @ResponseBody Movie getFilm(@RequestParam int film_id) {

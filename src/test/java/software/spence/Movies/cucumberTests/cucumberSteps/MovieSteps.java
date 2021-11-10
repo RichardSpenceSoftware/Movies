@@ -33,7 +33,7 @@ public class MovieSteps {
     @When("I add it to the database")
     public void inputtinginfo() {
 
-        trialMovie = new Movie(film_id,year,title);
+        trialMovie = new Movie(film_id,title);
         movieRepository.save(trialMovie);
 
     }
