@@ -30,7 +30,7 @@ public class AWStuff {
         return DataSourceBuilder
                 .create()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("database-2.cwyqqeh3ml68.us-east-2.rds.amazonaws.com:3306/sakila?useSSL=false&serverTimezone=UTC")
+                .url("jdbc:mysql://database-2.cwyqqeh3ml68.us-east-2.rds.amazonaws.com:3306/sakila?useSSL=false&serverTimezone=UTC")
                 .username(secrets.getUsername())
                 .password(secrets.getPassword())
                 .build();
