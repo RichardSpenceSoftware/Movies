@@ -9,7 +9,7 @@ public class MovieList {
     private List<Movie> movieList = new ArrayList<>();
 
     ///public MovieList() {
-    ///    this.movieList.add(new Movie(("Pssycho", 1960, "PG"));
+    ///    this.movieList.add(new Movie(("Psycho", 1960, "PG"));
      ///   this.movieList.add(new Movie(("Movie 43", 2010, "G"));
     ///}
 
