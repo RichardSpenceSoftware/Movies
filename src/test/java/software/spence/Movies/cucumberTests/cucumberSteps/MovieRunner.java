@@ -5,7 +5,6 @@ import io.cucumber.junit.CucumberOptions;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.junit.runner.RunWith;
 
-@CucumberContextConfiguration
 @RunWith( Cucumber.class )
 @CucumberOptions(
         features = "src/test/resources/MovieTest.feature",

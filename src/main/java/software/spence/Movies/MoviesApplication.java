@@ -1,5 +1,6 @@
 package software.spence.Movies;
 
+import com.amazonaws.services.secretsmanager.model.ResourceNotFoundException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,15 +10,24 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
+
+
+
 
 import java.util.Optional;
 
-
 @SpringBootApplication
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/movies")
 public class MoviesApplication {
+
+	@Autowired
+	private EmployeeRepository employeeRepository;
 
 	@Autowired
 	private MovieRepository movieRepository;
@@ -27,6 +37,55 @@ public class MoviesApplication {
 		SpringApplication.run(MoviesApplication.class, args);
 	}
 
+	// get all employees
+	@GetMapping("/employees")
+	public List<Employee> getAllEmployees(){
+		return employeeRepository.findAll();
+	}
+
+	// create employee rest api
+	@PostMapping("/employees")
+	public Employee createEmployee(@RequestBody Employee employee) {
+		return employeeRepository.save(employee);
+	}
+
+	// get employee by id rest api
+	@GetMapping("/employees/{id}")
+	public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
+		Employee employee = employeeRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id :" + id));
+		return ResponseEntity.ok(employee);
+	}
+
+	// update employee rest api
+
+	@PutMapping("/employees/{id}")
+	public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employeeDetails){
+		Employee employee = employeeRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id :" + id));
+
+		employee.setFirstName(employeeDetails.getFirstName());
+		employee.setLastName(employeeDetails.getLastName());
+		employee.setEmailId(employeeDetails.getEmailId());
+
+		Employee updatedEmployee = employeeRepository.save(employee);
+		return ResponseEntity.ok(updatedEmployee);
+	}
+
+	// delete employee rest api
+	@DeleteMapping("/employees/{id}")
+	public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long id){
+		Employee employee = employeeRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id :" + id));
+
+		employeeRepository.delete(employee);
+		Map<String, Boolean> response = new HashMap<>();
+		response.put("deleted", Boolean.TRUE);
+		return ResponseEntity.ok(response);
+	}
+
+
+
 	@GetMapping("/all")
 	public @ResponseBody Iterable<Movie> getAllMovies() {
 		return movieRepository.findAll();
@@ -35,11 +94,15 @@ public class MoviesApplication {
 
 
 	@PostMapping("/addMovie")
-	public @ResponseBody String addAMovie (@RequestParam int film_id,
-										   @RequestParam String title){
-		Movie savedMovie = new Movie(film_id, title);
+	public @ResponseBody String addAMovie (@RequestParam String title, @RequestParam String summary, @RequestParam int comedy) {
+		Movie savedMovie = new Movie(title, summary, comedy);
 		movieRepository.save(savedMovie);
 		return "Saved";
+	}
+
+	@PostMapping("/addMovieBody")
+	public Movie createMovie(@RequestBody Movie movie) {
+		return movieRepository.save(movie);
 	}
 
 	@PostMapping("/deleteMovie")
@@ -50,10 +113,12 @@ public class MoviesApplication {
 
 	@PostMapping("/updateMovie")
 	public @ResponseBody String updateMovie (@RequestParam int film_id,
-											 @RequestParam String title){
+											 @RequestParam String title, @RequestParam String summary, @RequestParam int comedy){
 		Optional<Movie> movie = movieRepository.findById(film_id);
 		Movie film = movie.get();
+		film.setComedy(comedy);
 		film.setTitle(title);
+		film.setSummary(summary);
 		movieRepository.save(film);
 		return "Movie updated";
 	}
@@ -81,6 +146,53 @@ public class MoviesApplication {
 		Optional<Movie> filmResponse = movieRepository.findById(film_id);
 		Movie film = filmResponse.get();
 		return film;
+	}
+	////////////////////////////////new stuff///////////////////////
+
+
+	@GetMapping("/films")
+	public @ResponseBody Iterable<Movie> getAllFilm() {
+		return movieRepository.findAll();
+	}
+
+
+	@PostMapping("/films")
+	public Movie createFilm(@RequestBody Movie movie) {
+		return movieRepository.save(movie);
+	}
+
+	@GetMapping("/films/{id}")
+	public ResponseEntity<Movie> getMovieById(@PathVariable int id) {
+		Movie movie = movieRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Movie not exist with id :" + id));
+		return ResponseEntity.ok(movie);
+	}
+
+	// update employee rest api
+
+	@PutMapping("/films/{id}")
+	public ResponseEntity<Movie> updateEmployee(@PathVariable int id, @RequestBody Movie movieDetails){
+		Movie movie = movieRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Movie not exist with id :" + id));
+
+		movie.setTitle(movieDetails.getTitle());
+		movie.setSummary(movieDetails.getSummary());
+		movie.setComedy(movieDetails.getComedy());
+
+		Movie updatedMovie = movieRepository.save(movie);
+		return ResponseEntity.ok(updatedMovie);
+	}
+
+	// delete employee rest api
+	@DeleteMapping("/films/{id}")
+	public ResponseEntity<Map<String, Boolean>> deleteFilm(@PathVariable int id){
+		Movie movie = movieRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Movie not exist with id :" + id));
+
+		movieRepository.delete(movie);
+		Map<String, Boolean> response = new HashMap<>();
+		response.put("deleted", Boolean.TRUE);
+		return ResponseEntity.ok(response);
 	}
 
 }
