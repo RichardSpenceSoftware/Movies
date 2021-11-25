@@ -1,4 +1,4 @@
-package software.spence.Movies.cucumberTests.cucumberSteps;
+package software.spence.Movies;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,7 +13,7 @@ import java.util.Optional;
 import static org.junit.Assert.assertTrue;
 
 @SpringBootTest
-public class MovieSteps {
+public class MovieAddStepDefs {
 
     String title;
     int rating;

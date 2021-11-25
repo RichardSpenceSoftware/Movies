@@ -1,4 +1,4 @@
-package software.spence.Movies.cucumberTests.cucumberSteps;
+package software.spence.Movies;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -8,8 +8,8 @@ import org.junit.runner.RunWith;
 @RunWith( Cucumber.class )
 @CucumberOptions(
         features = "src/test/resources/MovieTest.feature",
-        glue = {"software.spence.Movies.cucumberTests.cucumberSteps"}
+        glue = {"software.spence.Movies"}
 )
 
-public class MovieRunner {
+public class CucumberRunner {
 }
