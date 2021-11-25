@@ -1,4 +1,4 @@
-package software.spence.Movies;
+package software.spence.Movies.AddFilmCucumber;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -20,11 +20,11 @@ public class MovieAddStepDefs {
     int year;
     int film_id;
     String summary;
-    String comedy;
+    int comedy;
 
-    Employee trialMovie;
+    Movie trialMovie;
     @Autowired
-    private EmployeeRepository movieRepository;
+    private MovieRepository movieRepository;
     @Given("film called Dune")
     public void Infoforthefilm() {
 
@@ -33,7 +33,7 @@ public class MovieAddStepDefs {
         rating = 5;
         year = 25;
         summary = "Hello";
-        comedy = "1";
+        comedy = 1;
 
 
 
@@ -41,17 +41,17 @@ public class MovieAddStepDefs {
     @When("I add it to the database")
     public void inputtinginfo() {
 
-        trialMovie = new Employee(title,summary,comedy);
+        trialMovie = new Movie(title,summary,comedy);
         movieRepository.save(trialMovie);
 
     }
     @Then("I should be told")
     public void checkifcorrect() {
 
-        Long testID = trialMovie.getId();
-        Optional<Employee> actualMovieOptional = movieRepository.findById(testID);
-        Employee actualMovie = actualMovieOptional.get();
+        int testID = trialMovie.getId();
+        Optional<Movie> actualMovieOptional = movieRepository.findById(testID);
+        Movie actualMovie = actualMovieOptional.get();
         System.out.println(trialMovie);
-        assertTrue(actualMovie.getEmailId().equals(trialMovie.getEmailId()));
+        assertTrue(actualMovie.getTitle().equals(trialMovie.getTitle()));
     }
 }
