@@ -9,8 +9,8 @@ public class MovieTest {
 
     @Test
     void testgettitle(){
-        Movie movie = new Movie("Goblin","Bout a Goblin",1);
+        Movie movie = new Movie("Goblins","Bout a Goblin",1);
         String title = movie.getTitle();
-        assertEquals("Goblin",title,"correct");
+        assertEquals("Goblins",title,"correct");
     }
 }
