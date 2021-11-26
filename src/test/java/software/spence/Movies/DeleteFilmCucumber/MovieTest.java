@@ -1,6 +1,7 @@
-package software.spence.Movies;
+package software.spence.Movies.DeleteFilmCucumber;
 
 import org.junit.jupiter.api.Test;
+import software.spence.Movies.Movie;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
