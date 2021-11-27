@@ -1,9 +1,11 @@
+package software.spence.Movies.AddFilmCucumber;
+
 import org.junit.jupiter.api.Test;
 import software.spence.Movies.Movie;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MovieTest {
+public class EasyTest {
 
     @Test
     void testgettitle(){
@@ -12,3 +14,4 @@ public class MovieTest {
         assertEquals("Goblin",title,"correct");
     }
 }
+
