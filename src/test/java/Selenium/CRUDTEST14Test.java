@@ -40,6 +40,7 @@ public class CRUDTEST14Test {
   }
   @Test
   public void cRUDTEST11() {
+    System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
     driver.get("http://localhost:3000/films");
     driver.manage().window().setSize(new Dimension(734, 824));
     driver.findElement(By.cssSelector(".btn-primary")).click();
