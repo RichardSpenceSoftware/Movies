@@ -5,8 +5,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import software.spence.Movies.Employee;
-import software.spence.Movies.EmployeeRepository;
 import software.spence.Movies.Movie;
 import software.spence.Movies.MovieRepository;
 import java.util.Optional;
