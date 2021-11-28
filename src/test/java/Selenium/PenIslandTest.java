@@ -9,6 +9,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +33,12 @@ public class PenIslandTest {
   }
   @Test
   public void penIsland() {
-    System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+    ChromeOptions options = new ChromeOptions();
+    System.setProperty("webdriver.chrome.driver","/usr/local/bin/chromedriver");
+    options.addArguments("--headless");
+    options.addArguments("--no-sandbox");
+    options.addArguments("--disable-dev-shm-usage");
+    driver = new ChromeDriver(options);
     driver.get("https://penisland.net/");
     driver.manage().window().setSize(new Dimension(786, 824));
     driver.findElement(By.linkText("Wood")).click();
